@@ -30,7 +30,7 @@ MAX_LEVELS = 3
 screen_scroll = 0
 bg_scroll = 0
 level = 1
-start_game = True
+start_game = False
 start_intro = False
 
 
@@ -44,8 +44,6 @@ grenade_thrown = False
 
 #load music and sounds
 pygame.mixer.music.load('audio/music2.mp3')
-pygame.mixer.music.set_volume(1)
-pygame.mixer.music.play(-1, 0.0, 5000)
 jump_fx = pygame.mixer.Sound('audio/jump.wav')
 jump_fx.set_volume(1)
 shot_fx = pygame.mixer.Sound('audio/shot.wav')
@@ -383,10 +381,10 @@ class World():
 						decoration = Decoration(img, x * TILE_SIZE, y * TILE_SIZE)
 						decoration_group.add(decoration)
 					elif tile == 15:#create player
-						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 10, 20, 5)
+						player = Soldier('player', x * TILE_SIZE, y * TILE_SIZE, 1.65, 30, 20, 5)
 						health_bar = HealthBar(10, 10, player.health, player.health)
 					elif tile == 16:#create enemies
-						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 4, 20, 0)
+						enemy = Soldier('enemy', x * TILE_SIZE, y * TILE_SIZE, 1.65, 30, 20, 0)
 						enemy_group.add(enemy)
 					elif tile == 17:#create ammo box
 						item_box = ItemBox('Ammo', x * TILE_SIZE, y * TILE_SIZE)
@@ -689,6 +687,8 @@ while run:
 			run = False
 	else:
 		#update background
+		pygame.mixer.music.set_volume(1)
+		pygame.mixer.music.play(-1, 0.0, 5000)
 		draw_bg()
 		#draw world map
 		world.draw()
